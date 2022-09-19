@@ -3,24 +3,20 @@ from .models import Post, Group
 
 
 def index(request):
-    posts = Post.objects.order_by('-pub_date')[:10]
-    template = 'posts/index.html'
-    title = 'Это главная страница проекта Yatube'
+    NUMBER_POSTS: int = 10
+    posts = Post.objects.all()[:NUMBER_POSTS]
     context = {
         'posts': posts,
-        'title': title
     }
-    return render(request, template, context)
+    return render(request, 'posts/index.html', context)
 
 
 def group_posts(request, slug):
-    template_posts = 'posts/group_list.html'
-    title = 'Страница сообществ проекта Yatube'
+    NUMBER_POSTS: int = 10
     group = get_object_or_404(Group, slug=slug)
-    posts = group.posts.all()[:10]
+    posts = group.posts.all()[:NUMBER_POSTS]
     context = {
         'group': group,
         'posts': posts,
-        'title': title
     }
-    return render(request, template_posts, context)
+    return render(request, 'posts/group_list.html', context)
