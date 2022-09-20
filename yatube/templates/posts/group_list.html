@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-Записи сообщества {{ group.title }}
+{{ group.title }}
 {% endblock %}
 {% block content %}
 <h1> {{ group.title }} </h1>
@@ -16,9 +16,7 @@
     </li>
   </ul>
   <p>{{ post.text|linebreaksbr }}</p>
-  {% if not forloop.last %}
-</article>
-<hr>
-{% endif %}
+  </article>
+  {% if not forloop.last %} <hr> {% endif %}
 {% endfor %}
 {% endblock %}}
